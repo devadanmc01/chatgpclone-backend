@@ -5,6 +5,9 @@ const configuration = new Configuration({
   apiKey: process.env.OPENAI_APIKEY,
 });
 const openai = new OpenAIApi(configuration);
+const redisAdapter = require('socket.io-redis');
+const redisUrl = process.env.REDIS_URL || 'redis://localhost:6379';
+io.adapter(redisAdapter(redisUrl));
 
 io.on("connection", (socket) => {
   try {
